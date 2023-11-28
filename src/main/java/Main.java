@@ -33,7 +33,9 @@ public class Main {
         patients.add(patient1);
         patients.add(patient2);
 
-        WindowDisplay display1 = new WindowDisplay();
-        display1.display(patients);
+        WindowDisplay display = new WindowDisplay();
+        display.displayForAdminitrator(patients);
+        display.displayForDoctor(patients);
+
     }
 }

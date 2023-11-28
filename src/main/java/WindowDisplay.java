@@ -7,7 +7,9 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class WindowDisplay {
-    public JPanel displayForAdminitrator(ArrayList<Patients> patients){
+    public void displayForAdminitrator(ArrayList<Patients> patients){
+        JFrame frame = new JFrame("Administrator");
+        frame.setSize(800,600);
         // Create a simple window to display the output
         JPanel displayPanel = new JPanel();
         // Create a label for each patient's text
@@ -15,10 +17,18 @@ public class WindowDisplay {
             JLabel displayLabel = new JLabel(pt.displayAdministrator());
             displayPanel.add(displayLabel);
         }
-        return displayPanel;
+        frame.setContentPane(displayPanel);
+        frame.setVisible(true);
+        frame.addWindowListener(new WindowAdapter() {// Ends program if close window is clicked
+            public void windowClosing(WindowEvent e) {
+                frame.dispose();
+            }
+        });
     }
 
-    public JPanel displayForDoctor(ArrayList<Patients> patients){
+    public void displayForDoctor(ArrayList<Patients> patients){
+        JFrame frame = new JFrame("Doctor");
+        frame.setSize(1000,600);
         JPanel displayPanel = new JPanel();
         displayPanel.setLayout(new FlowLayout(FlowLayout.LEADING,20,20));
         for(Patients pt: patients) {
@@ -50,17 +60,7 @@ public class WindowDisplay {
             displayPanel.add(new JLabel("<html> Blood pressure " + pt.getBpMeasurement().getSystolicPressure() +
                     " Over " + pt.getBpMeasurement().getDiastolicPressure()));
         }
-        return displayPanel;
-    }
-
-    public void display(ArrayList<Patients> patients){
-        JFrame frame = new JFrame("Administrator");
-        frame.setSize(900,600);
-        JButton doc_button = new JButton("Doctor");
-        JButton adm_button = new JButton("Administrator");
-        JPanel doctor = displayForDoctor(patients);
-        frame.add(doctor);
-        frame.setContentPane(doctor);
+        frame.setContentPane(displayPanel);
         frame.setVisible(true);
         frame.addWindowListener(new WindowAdapter() {// Ends program if close window is clicked
             public void windowClosing(WindowEvent e) {
@@ -68,4 +68,5 @@ public class WindowDisplay {
             }
         });
     }
+
 }
